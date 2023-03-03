@@ -1,0 +1,76 @@
+<html data-color-mode="dark" data-dark-theme="dark_dimmed">
+<head>
+    <title>KSP2 Craft Tools</title>
+    <link href="https://unpkg.com/@primer/css@^20.2.4/dist/primer.css" rel="stylesheet" />
+    <link  href="dist/css/alwan.min.css" rel="stylesheet" />
+    <link href="dist/css/crafteditor.css" rel="stylesheet" />
+    <script src="dist/js/alwan.min.js"></script>
+</head>
+<body>
+    <div class="Header">
+        <div class="Header-item">
+            <a href="#" class="Header-link f4 d-flex flex-items-center">
+                <span>KSP2 Craft Data Viewer/Color Editor</span>
+            </a>
+        </div>
+    </div>
+    <div class="Layout Layout--sidebar-wide">
+        <div class="Layout-main border">
+            <div class="tabnav">
+                <nav class="tabnav-tabs">
+                    <a class="tabnav-tab craftTabSelector" aria-selected="true">Craft Details</a>
+                    <a class="tabnav-tab partTabSelector" >Part Details</a>
+                    <a class="tabnav-tab colorEditorSelector">Colors</a>
+                </nav>
+            </div>
+            <div class="border p-4 detailsContainer craftDetails" style="display:none;"></div>
+            <div class="border p-4 detailsContainer partDetails" style="display:none;">
+                <p>Load a craft to view parts</p>
+            </div>
+            <div class="border p-4 detailsContainer colorEditor" style="display:none;">
+                <div class="p-4 partColorToasts">
+                    <p>Load a craft to edit colors</p>
+                </div>
+                <div class="d-flex">
+                    <div class="p-4">
+                        Color Picker
+                        <div id="colorpicker"></div>
+                        <div id="pickerContainer"></div>
+                        <div>
+                            <button class="setBaseButton">Set Part Base Color</button>
+                            <button class="setAccentButton">Set Part Accent Color</button><br />
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        All Ship Colors
+                        <div id="shipColors"></div>
+                    </div>
+                </div>
+            </div>      
+        </div>
+        <div class="Layout-sidebar border">
+            <form id="fileUploadForm">
+                <input type="file" class="m-3" id="fileUpload" accept=".json">
+                <div class="form-group">
+                    <div class="form-group-header">
+                      <label for="example-textarea">JSON cut/paste (larger ships may take a moment to load)</label>
+                    </div>
+                    <div class="form-group-body">
+                      <textarea class="form-control" id="json-text"></textarea>
+                    </div>
+                  </div>
+            </form>
+            <h2 id="craftName"></h2>
+            <nav class="menu m-3" aria-label="List of Parts">
+                <span class="menu-heading" id="menu-heading">Craft Parts</span>
+                <ul class="tree" id="partListNav"></ul>
+            </nav>
+        </div>
+
+    </div>
+</div>
+<script type="module" src="dist/js/part.js"></script>
+<script type="module" src="dist/js/craft.js"></script>
+<script type="module" src="dist/js/main.js"></script>
+</body>
+</html>
