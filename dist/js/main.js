@@ -42,7 +42,7 @@ document.querySelector('.partTabSelector').addEventListener('click', displayPart
 document.querySelector('.colorEditorSelector').addEventListener('click', displayColorEditor);
 
 document.querySelector('.setBaseButton').addEventListener('click', setBase);
-document.querySelector('.setBaseButton').addEventListener('click', setAccent);
+document.querySelector('.setAccentButton').addEventListener('click', setAccent);
 
 // Alwan color picker 
 const alwan = new Alwan('#colorpicker', {
