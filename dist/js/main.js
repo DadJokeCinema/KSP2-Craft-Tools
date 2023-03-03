@@ -42,6 +42,7 @@ document.querySelector('.partTabSelector').addEventListener('click', displayPart
 document.querySelector('.colorEditorSelector').addEventListener('click', displayColorEditor);
 
 document.querySelector('.setBaseButton').addEventListener('click', setBase);
+document.querySelector('.setBaseButton').addEventListener('click', setAccent);
 
 // Alwan color picker 
 const alwan = new Alwan('#colorpicker', {
@@ -292,6 +293,20 @@ function setBase() {
     color.g = color.g / 255;
     colorModule.ModuleData[0].DataObject.Base.storedValue = color;
     selectedPart.setBaseColor(color);
+    selectedPart.updateColorBlocks();
+    displayColorEditor();
+    craftTextArea.value =  JSON.stringify(jsonLiveCopy);
+}
+
+function setAccent() {
+    let color = alwan.getColor().rgb();
+    let jsonPart = jsonLiveCopy.parts.find(el => el.PartGuid.Guid == selectedPart.Guid);
+    let colorModule = jsonPart.PartModulesState.find(el => el.Name == "PartComponentModule_Color");
+    color.r = color.r / 255;
+    color.b = color.b / 255;
+    color.g = color.g / 255;
+    colorModule.ModuleData[0].DataObject.Accent.storedValue = color;
+    selectedPart.setAccentColor(color);
     selectedPart.updateColorBlocks();
     displayColorEditor();
     craftTextArea.value =  JSON.stringify(jsonLiveCopy);
