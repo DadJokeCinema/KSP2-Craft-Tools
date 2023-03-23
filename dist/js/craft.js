@@ -2,9 +2,12 @@ import { Part } from './part.js';
 
 export class Craft {
     constructor(json) {
-        if(json.AssemblyDefinition) {
+        if(json.hasOwnProperty("AssemblyDefinition")) {
             this.craftName = json.AssemblyDefinition.assemblyName;
             this.description = json.AssemblyDefinition.description;
+        } else if (json.hasOwnProperty("Metadata")) {
+            this.craftName = json.Metadata.VehicleName;
+            this.description = json.Metadata.Description;
         }
         if(json.AssemblyOABConfig) {
             if(json.AssemblyOABConfig.RootGuid.Guid != "00000000-0000-0000-0000-000000000000") {

@@ -62,8 +62,42 @@ function parseCraftFile (file) {
     } else {
         jsonLiveCopy = JSON.parse(file);
     }
-    
-    craft = new Craft(jsonLiveCopy);
+
+    // Vessel only, or save file?
+    if(jsonLiveCopy.hasOwnProperty('Metadata')){
+        // is it a savegame file?
+        if(jsonLiveCopy.Metadata.hasOwnProperty('CampaignType')){
+            let craftListDiv = document.querySelector('#craftList');
+            craftListDiv.innerHTML = "<h3>Crafts in Save Game</h3>";
+            // get list of craft
+            for(let saveCraft of jsonLiveCopy.Vessels){
+                saveCraft = new Craft(saveCraft);
+                let craftLink = document.createElement('p');
+                craftLink.innerHTML = "<a href='#'><strong>" + saveCraft.craftName + "</strong></a>";
+                craftLink.addEventListener('click', selectCraft.bind(saveCraft));
+                craftListDiv.appendChild(craftLink);
+            }
+        } 
+    } else {
+        craft = new Craft(jsonLiveCopy);
+        // Craft name
+        document.querySelector('#craftName').textContent = craft.craftName;
+        for ( let part of craft.Parts ) {
+            part.addPartToList();
+            part.domElement.addEventListener('click', selectPart.bind(part));
+        }
+        selectedPart = craft.rootPart;
+        displayCraftInfo(null);
+    }
+}
+
+function selectCraft(e){
+    let partListDiv = document.querySelector('#partListNav');
+    while (partListDiv.firstChild) {
+        partListDiv.removeChild(partListDiv.firstChild);
+    }
+
+    craft = this;
     // Craft name
     document.querySelector('#craftName').textContent = craft.craftName;
     for ( let part of craft.Parts ) {
